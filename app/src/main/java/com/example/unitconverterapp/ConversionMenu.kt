@@ -28,7 +28,11 @@ import androidx.compose.ui.unit.toSize
  * Created by chukimmuoi on 13/08/2022.
  */
 @Composable
-fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier) {
+fun ConversionMenu(
+    list: List<Conversion>,
+    modifier: Modifier = Modifier,
+    convert: (Conversion) -> Unit
+) {
 
     var displayingText by remember { mutableStateOf("Select the conversion type") }
     var textFileSize by remember { mutableStateOf(Size.Zero) }
@@ -67,6 +71,7 @@ fun ConversionMenu(list: List<Conversion>, modifier: Modifier = Modifier) {
                 DropdownMenuItem(onClick = {
                     displayingText = it.description
                     expanded = false
+                    convert(it)
                 }) {
                     Text(
                         text = it.description,
