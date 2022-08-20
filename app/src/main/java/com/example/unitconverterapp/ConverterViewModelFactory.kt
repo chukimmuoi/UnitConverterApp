@@ -3,6 +3,7 @@ package com.example.unitconverterapp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.unitconverterapp.data.ConverterRepository
+import javax.inject.Inject
 
 /**
  * @author: My Project
@@ -13,7 +14,10 @@ import com.example.unitconverterapp.data.ConverterRepository
  * @Project: UnitConverterApp
  * Created by chukimmuoi on 20/08/2022.
  */
-class ConverterViewModelFactory(private val repository: ConverterRepository): ViewModelProvider.NewInstanceFactory() {
+class ConverterViewModelFactory
+@Inject constructor(
+    private val repository: ConverterRepository
+) : ViewModelProvider.NewInstanceFactory() {
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return ConverterViewModel(repository) as T

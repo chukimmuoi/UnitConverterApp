@@ -18,25 +18,4 @@ import androidx.room.RoomDatabase
 abstract class ConverterDatabase: RoomDatabase() {
 
     abstract val converterDAO: ConverterDAO
-
-    companion object {
-
-        private const val DATABASE_NAME = "converter_database"
-
-        private val LOCK = Any()
-
-        @Volatile
-        private var instance: ConverterDatabase? = null
-
-        private fun create(context: Context): ConverterDatabase =
-            Room.databaseBuilder(context, ConverterDatabase::class.java, DATABASE_NAME)
-                .fallbackToDestructiveMigration()
-                .build()
-
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK) {
-            instance ?: create(context).also {
-                instance = it
-            }
-        }
-    }
 }
