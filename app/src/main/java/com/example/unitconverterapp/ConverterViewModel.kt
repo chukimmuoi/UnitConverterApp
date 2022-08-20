@@ -32,6 +32,18 @@ class ConverterViewModel(
 
     val resultList = repository.getSaveResults()
 
+    fun removeResult(item: ConversionResult) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteResult(item)
+        }
+    }
+
+    fun clearAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.deleteAllResult()
+        }
+    }
+
     fun addResult(message1: String, message2: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.insertResult(ConversionResult(0, message1, message2))

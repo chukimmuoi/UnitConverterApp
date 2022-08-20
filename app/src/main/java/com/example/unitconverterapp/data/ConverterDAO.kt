@@ -1,6 +1,7 @@
 package com.example.unitconverterapp.data
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +21,7 @@ interface ConverterDAO {
     @Insert
     suspend fun insertResult(result: ConversionResult)
 
-    @Insert
+    @Delete
     suspend fun deleteResult(result: ConversionResult)
 
     @Query("DELETE FROM result_table")
