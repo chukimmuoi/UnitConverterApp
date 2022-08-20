@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.unitconverterapp.ConverterViewModel
+import com.example.unitconverterapp.ConverterViewModelFactory
 
 /**
  * @author: My Project
@@ -21,12 +22,15 @@ import com.example.unitconverterapp.ConverterViewModel
  */
 @Composable
 fun BaseScreen(
+    factory: ConverterViewModelFactory,
     modifier: Modifier = Modifier,
-    converterViewModel: ConverterViewModel = viewModel()
+    converterViewModel: ConverterViewModel = viewModel(factory = factory)
 ) {
     val list = converterViewModel.getConversions()
     Column(modifier = modifier.padding(32.dp)) {
-        TopScreen(list)
+        TopScreen(list) { message1, message2 ->
+            converterViewModel.addResult(message1, message2)
+        }
         Spacer(modifier = modifier.height(16.dp))
         HistoryScreen()
     }
